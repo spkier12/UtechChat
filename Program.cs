@@ -12,8 +12,8 @@ namespace UtechChat
             Program gclass = new();
             IPAddress ip = IPAddress.Any;
             TcpListener server = new(ip, 5000);
-            server.Start();
             Console.WriteLine($"Server started on {ip}:5000");
+            server.Start();
 
             NetworkStream[] sm = new NetworkStream[4096];
             int count = 0;
@@ -24,7 +24,7 @@ namespace UtechChat
                 {
                     TcpClient client = server.AcceptTcpClient();
                     NetworkStream stream = client.GetStream();
-                    Console.WriteLine("Client connected");
+                    Console.WriteLine($"Client Nr: {count} Connected of Total: {sm.Length}");
 
                     count++;
                     if (count >= 4090) count = 0;
